@@ -1,0 +1,15 @@
+2018-07-24T14:51:17+02:00 [26329] DEBUG default - [User=  ()] Loading plugin. Type=Authentication, Plugin=Ldap [File=/var/www/html/booked/lib/Common/PluginManager.php,Line=209]
+2018-07-24T14:51:17+02:00 [26329] DEBUG default - [User=  ()] Using CaptchaService [File=/var/www/html/booked/lib/Application/Authentication/CaptchaService.php,Line=97]
+2018-07-24T14:51:18+02:00 [26329] DEBUG default - [User=  ()] Loading plugin. Type=Authentication, Plugin=Ldap [File=/var/www/html/booked/lib/Common/PluginManager.php,Line=209]
+2018-07-24T14:51:18+02:00 [26329] DEBUG default - [User=  ()] Using CaptchaService [File=/var/www/html/booked/lib/Application/Authentication/CaptchaService.php,Line=97]
+2018-07-24T14:51:18+02:00 [26329] DEBUG default - [User=  ()] Trying to connect to LDAP [File=/var/www/html/booked/plugins/Authentication/Ldap/Ldap2Wrapper.php,Line=51]
+2018-07-24T14:51:18+02:00 [26329] ERROR default - [User=  ()] Uncaught exception: Error: Call to undefined function dl() in /var/www/html/booked/plugins/Authentication/Ldap/LDAP2.php:1632
+Stack trace:
+#0 /var/www/html/booked/plugins/Authentication/Ldap/LDAP2.php(197): Net_LDAP2::checkLDAPExtension()
+#1 /var/www/html/booked/plugins/Authentication/Ldap/Ldap2Wrapper.php(53): Net_LDAP2::connect(Array)
+#2 /var/www/html/booked/plugins/Authentication/Ldap/Ldap.php(130): Ldap2Wrapper->Connect()
+#3 /var/www/html/booked/lib/Application/Authentication/WebAuthentication.php(106): Ldap->Validate('admin', 'password')
+#4 /var/www/html/booked/Presenters/LoginPresenter.php(165): WebAuthentication->Validate('admin', 'password')
+#5 /var/www/html/booked/Pages/LoginPage.php(223): LoginPresenter->Login()
+#6 /var/www/html/booked/Web/index.php(35): LoginPage->Login()
+#7 {main} [File=/var/www/html/booked/lib/Common/Logging/ExceptionHandler.php,Line=33]
