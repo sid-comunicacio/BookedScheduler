@@ -1,0 +1,15 @@
+RewriteEngine On
+# Set RewriteBase if your physical path is different from the URL. For example, if using an alias
+
+# Uncomment the following two lines to force HTTPS
+#RewriteCond %{HTTPS} off
+#RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+#Evitamos que el index.php de un 301 y nos redirija por http en vez de https
+RewriteRule ^index.php Web/$1 [QSA,L]
+
+
+RewriteRule ^Web - [L,NC]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ Web/$1 [QSA,L]
