@@ -128,7 +128,7 @@ $conf['settings']['phpmailer']['smtp.debug'] = getenv('BOOKED_SETTINGS_PHPMAILER
  */
 
 $conf['settings']['plugins']['Authentication'] = getenv('BOOKED_SETTINGS_PLUGINS_AUTHENTICATION');
-//$conf['settings']['plugins']['Authentication'] = 'LdapControlGroups';
+//$conf['settings']['plugins']['Authentication'] = 'CAS';
 $conf['settings']['plugins']['Authorization'] = getenv('BOOKED_SETTINGS_PLUGINS_AUTHORIZATION');
 $conf['settings']['plugins']['Permission'] = getenv('BOOKED_SETTINGS_PLUGINS_PERMISSION');
 $conf['settings']['plugins']['PostRegistration'] = getenv('BOOKED_SETTINGS_PLUGINS_POSTREGISTRATION');
