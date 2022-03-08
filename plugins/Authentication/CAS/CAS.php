@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2011-2018 Nick Korbel
+ * Copyright 2011-2020 Nick Korbel
  * Copyright 2013-2014 Bart Verheyde
  * Copyright 2013-2014 Bryan Green
  *
@@ -90,6 +90,48 @@ class CAS extends Authentication implements IAuthentication
         $username = phpCAS::getUser();
         $attributes = phpCAS::getAttributes();
         $this->Synchronize($username, $attributes);
+
+        if ($isAuth) {
+            // User Id
+            $userid_res = ServiceLocator::GetDatabase()->Query(new AdHocCommand("select user_id from users where username = \"$username\""));
+            while ($row = $userid_res->GetRow())
+            {
+                    $userId = $row['user_id'];
+            } 
+            // Productor group id
+            $addgroupid_productor_res = ServiceLocator::GetDatabase()->Query(new AdHocCommand("select group_id from groups where name = 'productors'"));
+            while ($row = $addgroupid_productor_res->GetRow())
+            {
+                    $addgroupid_productor = $row['group_id'];
+            }
+            
+            // Find out if the user should be productor
+            $isproductor_res = ServiceLocator::GetDatabase()->Query(new AdHocCommand("select count(*) from productors where username = \"$username\""));
+            $srow = $isproductor_res->GetRow();
+            $isproductor = $srow['count(*)'];
+
+            // Find out if the user is in the group productors
+            $ingroup_res = ServiceLocator::GetDatabase()->Query(new AdHocCommand("select count(*) from user_groups where user_id = \"$userId\" and group_id = \"$addgroupid_productor\""));
+            $srow = $ingroup_res->GetRow();
+            $ingroup = $srow['count(*)'];
+
+            // If is not a productor and it is in the group, delete the group assignment
+            if(!$isproductor && $ingroup) {
+                    ServiceLocator::GetDatabase()->Execute(new AdHocCommand("delete from user_groups where user_id = $userId and group_id = $addgroupid_productor"));
+            }
+            //print $isproductor;
+            //print("$$$$"); 
+            print $ingroup;
+            print("$$$$"); 
+            print $userId;
+            print("$$$$"); 
+            //print $addgroupid_productor;
+            // If it is a productor and it is not in the group, insert the group assignment
+            if($isproductor && !$ingroup) {
+                    ServiceLocator::GetDatabase()->Execute(new AdHocCommand("insert into user_groups (user_id, group_id) VALUES ($userId, $addgroupid_productor)"));
+            }
+
+        }
 
         return $this->authToDecorate->Login($username, $loginContext);
     }
