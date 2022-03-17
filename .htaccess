@@ -5,8 +5,8 @@ RewriteEngine On
 #RewriteCond %{HTTPS} off
 #RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-#Evitamos que el index.php de un 301 y nos redirija por http en vez de https
-RewriteRule ^index.php Web/$1 [QSA,L]
+#Evitamos que el index.php de un 301 y nos redirija por http en vez de https ==> Con CAS nos hace un bucle de redirecciones
+#RewriteRule ^index.php Web/$1 [QSA,L]
 
 
 RewriteRule ^Web - [L,NC]
