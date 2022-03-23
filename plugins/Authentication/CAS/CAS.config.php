@@ -18,17 +18,17 @@ You should have received a copy of the GNU General Public License
 along with Booked Scheduler.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-$conf['settings']['cas.version'] = 'S1';					// '1.0' = CAS_VERSION_1_0, '2.0 = CAS_VERSION_2_0, 'S1' = SAML_VERSION_1_1
-$conf['settings']['cas.server.hostname'] = 'sso.uab.cat/cas/';		// the hostname of the CAS server
-$conf['settings']['cas.port'] = '443';						// the port the CAS server is running on
-$conf['settings']['cas.server.uri'] = '';					// the URI the CAS server is responding on
-$conf['settings']['cas.change.session.id'] = 'false';		// Allow phpCAS to change the session_id
-$conf['settings']['email.suffix'] = '@uab.cat';		// Email suffix to use when storing CAS user account. IE, email addresses will be saved to Booked Scheduler as username@yourdomain.com
+$conf['settings']['cas.version'] = getenv('BOOKED_CAS_SETTINGS_CAS_VERSION');					// '1.0' = CAS_VERSION_1_0, '2.0 = CAS_VERSION_2_0, 'S1' = SAML_VERSION_1_1
+$conf['settings']['cas.server.hostname'] = getenv('BOOKED_CAS_SETTINGS_CAS_SERVER_HOSTNAME');		// the hostname of the CAS server
+$conf['settings']['cas.port'] = getenv('BOOKED_CAS_SETTINGS_CAS_PORT');						// the port the CAS server is running on
+$conf['settings']['cas.server.uri'] = getenv('BOOKED_CAS_SETTINGS_CAS_SERVER_URI');					// the URI the CAS server is responding on
+$conf['settings']['cas.change.session.id'] = getenv('BOOKED_CAS_SETTINGS_CAS_CHANGE_SESSION_ID');		// Allow phpCAS to change the session_id
+$conf['settings']['email.suffix'] = getenv('BOOKED_CAS_SETTINGS_CAS_EMAIL_SUFFIX');		// Email suffix to use when storing CAS user account. IE, email addresses will be saved to Booked Scheduler as username@yourdomain.com
 
-$conf['settings']['cas_logout_servers'] = 'sso.uab.cat/cas/';				// Comma separated list of servers to use for logout. Leave blank to not use cas logout servers
+$conf['settings']['cas_logout_servers'] = getenv('BOOKED_CAS_SETTINGS_CAS_LOGOUT_SERVERS');				// Comma separated list of servers to use for logout. Leave blank to not use cas logout servers
 
-$conf['settings']['cas.certificates'] = '';	// Path to certificate to use for CAS. Leave blank if no certificate should be used
-$conf['settings']['cas.attribute.mapping'] = 'givenName=givenName,surName=sn,email=mail,username=uid';  //bookedAttribute=CASAttribute
-$conf['settings']['cas.debug.enabled'] = 'true';
-$conf['settings']['cas.debug.file'] = '/tmp/phpcas.log';
+$conf['settings']['cas.certificates'] = getenv('BOOKED_CAS_SETTINGS_CERTIFICATES');	// Path to certificate to use for CAS. Leave blank if no certificate should be used
+$conf['settings']['cas.attribute.mapping'] = getenv('BOOKED_CAS_SETTINGS_CAS_ATTRIBUTE_MAPPING');  //bookedAttribute=CASAttribute
+$conf['settings']['cas.debug.enabled'] = getenv('BOOKED_CAS_SETTINGS_CAS_DEBUG_ENABLED');
+$conf['settings']['cas.debug.file'] = getenv('BOOKED_CAS_SETTINGS_CAS_DEBUG_FILE');
 ?>
