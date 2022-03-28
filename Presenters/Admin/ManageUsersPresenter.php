@@ -400,14 +400,14 @@ class ManageUsersPresenter extends ActionPresenter implements IManageUsersPresen
         $this->manageUsersService->ChangeAttribute($this->page->GetUserId(), $this->GetInlineAttributeValue());
     }
 
-	public function ExportUsers()
-	{
+    public function ExportUsers()
+    {
         //santosm START
-        $userTimezone = $this->server->GetUserSession()->Timezone;
-		$this->PageLoad($userTimezone);
+        $userTimezone = ServiceLocator::GetServer()->GetUserSession()->Timezone;
+	$this->PageLoad($userTimezone);
         //santosm END
-		$this->page->ShowExportCsv();
-	}
+	$this->page->ShowExportCsv();
+    }
 
     public function ProcessDataRequest($dataRequest)
     {
